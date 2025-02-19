@@ -41,19 +41,27 @@ def random_names() -> Tuple[str, str]:
 
 
 def _format_plain(pair: Tuple[str, str]) -> str:
-    return f'{pair[0]} {pair[1]}'
+    pair_one = pair[0]
+    pair_two = pair[1]
+    return '%s %s' % (pair_one, pair_two)
 
 
 def _format_capital(pair: Tuple[str, str]) -> str:
-    return f'{pair[0].capitalize()} {pair[1].capitalize()}'
+    pair_one = pair[0].capitalize()
+    pair_two = pair[1].capitalize()
+    return '%s %s' % (pair_one, pair_two)
 
 
 def _format_hyphen(pair: Tuple[str, str]) -> str:
-    return f'{pair[0]}-{pair[1]}'
+    pair_one = pair[0]
+    pair_two = pair[1]
+    return '%s-%s' % (pair_one, pair_two)
 
 
 def _format_underscore(pair: Tuple[str, str]) -> str:
-    return f'{pair[0]}_{pair[1]}'
+    pair_one = pair[0]
+    pair_two = pair[1]
+    return '%s_%s' % (pair_one, pair_two)
 
 
 _formatting_methods: Dict[str, Callable[[Tuple[str, str]], str]] = {
@@ -69,7 +77,7 @@ def format_names(pair: Tuple[str, str], style: str = 'underscore') -> str:
     try:
         return _formatting_methods[style](pair)
     except KeyError as error:
-        raise NotImplementedError(f'No style \'{style}\'') from error
+        raise NotImplementedError('No style %s' % style) from error
 
 
 def generate_name(style: str = 'underscore', seed: int = None) -> str:
@@ -82,7 +90,7 @@ def generate_name(style: str = 'underscore', seed: int = None) -> str:
 # Command-line interface implementation
 PROGRAM = 'generate_name'
 USAGE = f"""\
-Usage: 
+Usage:
   {PROGRAM} [-h] [-v] [--style NAME]
   Generate random name pairing.\
 """

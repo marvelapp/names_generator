@@ -27,7 +27,7 @@ with open('names_generator/__meta__.py', mode='r') as source:
     metadata = {key: re.search(key + r'\s*=\s*[\'"]([^\'"]*)[\'"]', content).group(1)
                 for key in ['__version__', '__authors__', '__contact__', '__description__', '__license__']}
 
-
+generate_names = 'generate_name=names_generator:main'
 setup(
     name             = 'names_generator',
     version          = metadata['__version__'],
@@ -50,6 +50,6 @@ setup(
                         'Programming Language :: Python :: 3.11',
                         'Programming Language :: Python :: 3.12',
                         'Programming Language :: Python :: 3.13'],
-    entry_points     = {'console_scripts': [f'generate_name=names_generator:main']},
+    entry_points     = {'console_scripts': ['%s' % generate_names]},
     install_requires = ['cmdkit>=2.7.4', ]
 )
